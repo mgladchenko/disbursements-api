@@ -1,5 +1,6 @@
 package model;
 
+import endpoint.DisbursementStatus;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,7 +9,9 @@ import java.sql.Timestamp;
 @Data
 @Builder
 public class Disbursement {
-
+    private DisbursementStatus status;
+    private String user_id;
+    private String id;
     @Builder.Default
     private String external_id = "disb-" + System.currentTimeMillis();
     @Builder.Default

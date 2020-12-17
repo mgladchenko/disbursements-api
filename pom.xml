@@ -14,6 +14,7 @@
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <!--dependencies -->
         <serenity.version>2.3.9</serenity.version>
+        <assertj.version>3.17.2</assertj.version>
         <slf4j.version>1.7.28</slf4j.version>
     </properties>
 
@@ -32,6 +33,11 @@
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-rest-assured</artifactId>
             <version>${serenity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
