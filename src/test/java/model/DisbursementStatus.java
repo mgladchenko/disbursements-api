@@ -1,4 +1,4 @@
-package endpoint;
+package model;
 
 public enum DisbursementStatus {
     PENDING,

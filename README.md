@@ -12,11 +12,9 @@
 5. Verify that Maven was installed  
 `mvn -version`   
 
-**Run all tests:**  
-`mvn clean verify`
-
-**Run specific test class:**  
-`mvn clean verify -Dtest.name=DisbursementFlowTest`
+**To Run tests from command line:**  
+`mvn clean verify`  
+Note: This will run RunJBehaveTest which specifies BDD Story file for execution.
 
 **View Serenity HTML report:**  
 `mvn serenity:aggregate`    

@@ -14,8 +14,15 @@
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <!--dependencies -->
         <serenity.version>2.3.9</serenity.version>
+        <jbehave.version>1.46.0</jbehave.version>
         <assertj.version>3.17.2</assertj.version>
         <slf4j.version>1.7.28</slf4j.version>
+        <!--settings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>8</java.version>
+        <env>dev</env>
+        <test.name>*</test.name>
     </properties>
 
     <dependencies>
@@ -33,6 +40,11 @@
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-rest-assured</artifactId>
             <version>${serenity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-jbehave</artifactId>
+            <version>${jbehave.version}</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
@@ -53,6 +65,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
+                    <systemPropertyVariables>
+                        <env>${env}</env>
+                        <org.slf4j.simpleLogger.showDateTime>true</org.slf4j.simpleLogger.showDateTime>
+                        <org.slf4j.simpleLogger.dateTimeFormat>yyyy-MM-dd HH:mm:ss Z</org.slf4j.simpleLogger.dateTimeFormat>
+                    </systemPropertyVariables>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>**/test/**/${test.name}.java</include>
                     </includes>
@@ -86,8 +104,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>

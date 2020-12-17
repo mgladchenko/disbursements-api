@@ -1,10 +1,7 @@
 package model;
 
-import endpoint.DisbursementStatus;
 import lombok.Builder;
 import lombok.Data;
-
-import java.sql.Timestamp;
 
 @Data
 @Builder
