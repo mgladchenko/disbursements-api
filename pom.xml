@@ -72,7 +72,7 @@
                     </systemPropertyVariables>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
-                        <include>**/test/**/${test.name}.java</include>
+                        <include>**/**/**/${test.name}.java</include>
                     </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                     <skip>false</skip>
