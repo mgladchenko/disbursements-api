@@ -22,9 +22,10 @@ When I execute GET disbursement request
 Then I expect response status code 200
 Then I validate response body and disbursement status <finalStatus>
 
+Narrative:
+Note: Assuming that finalStatus will be triggered via specific amount+beneficiary_id_name mock combination
+Note: EWALLET/BANK channelCategory should be covered in separate scenarios
 Examples:
-#Note: Assuming that finalStatus will be triggered via specific amount+beneficiary_id_name mock combination
-#Note: EWALLET/BANK channelCategory should be covered in separate scenarios
 | channelCategory | amount | currency | beneficiary_id_name | initialStatus | finalStatus |
 | CASH            | 1000   | PHP      | Joe                 | ACCEPTED      | ACCEPTED    |
 | CASH            | 1000   | PHP      | Joe                 | ACCEPTED      | SENT        |
@@ -59,9 +60,10 @@ When I execute GET disbursement request
 Then I expect response status code 200
 Then I validate response body and disbursement status <finalStatus>
 
+Narrative:
+Note: Assuming that initialStatus will be triggered via specific amount+beneficiary_id_name mock combination
+Note: EWALLET/BANK channelCategory should be covered in separate scenarios
 Examples:
-#Note: Assuming that initialStatus will be triggered via specific amount+beneficiary_id_name mock combination
-#Note: EWALLET/BANK channelCategory should be covered in separate scenarios
 | channelCategory | amount | currency | beneficiary_id_name | initialStatus | finalStatus |
 | CASH            | 1000   | PHP      | Joe                 | ACCEPTED      | CANCELLED   |
 | CASH            | 1000   | PHP      | Joe                 | SENT          | CANCELLED   |
