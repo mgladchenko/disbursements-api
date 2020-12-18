@@ -33,7 +33,7 @@ Examples:
 Scenario: Disbursement API validations
 Meta: @disb-validations
 Given I set <apiSecretKey> API_SECRET_KEY
-Given I prepare new disbursement object with: <bankCode>, Mykola, 777, <description>, 150000
+Given I prepare new disbursement object with: <bankCode>, Mykola, 777, TA-desc, 150000
 When I execute POST disbursement request
 Then I expect response status code <statusCode>
 
