@@ -12,6 +12,7 @@ import org.jbehave.core.annotations.When;
 import static config.ConfigProperties.API_SECRET_KEY;
 import static endpoint.Endpoint.*;
 import static model.DisbursementStatus.PENDING;
+import static org.hamcrest.Matchers.is;
 
 public class DisbursementSteps extends BaseStep {
 
@@ -69,6 +70,19 @@ public class DisbursementSteps extends BaseStep {
     }
 
     @Step
+    @When("I execute GET disbursement request")
+    public DisbursementSteps getDisbursement() {
+        String apiSecretKey = Serenity.sessionVariableCalled("apiSecretKey");
+        Disbursement disbursement = Serenity.sessionVariableCalled("disbursement");
+
+        ValidatableResponse validatableResponse = given(apiSecretKey)
+                .get(GET_DISBURSEMENT, disbursement.getId())
+                .then();
+        Serenity.setSessionVariable("validatableResponse").to(validatableResponse);
+        return this;
+    }
+
+    @Step
     @Then("I expect response status code $expectedStatusCode")
     public DisbursementSteps validateResponseStatusCode(String expectedStatusCode) {
         ValidatableResponse validatableResponse = Serenity.sessionVariableCalled("validatableResponse");
@@ -77,16 +91,25 @@ public class DisbursementSteps extends BaseStep {
     }
 
     @Step
-    @Then("I validate response body")
-    public DisbursementSteps validateResponseBody() {
+    @Then("I validate response body and disbursement status $status")
+    public DisbursementSteps validateResponseBody(String status) {
         ValidatableResponse validatableResponse = Serenity.sessionVariableCalled("validatableResponse");
         Disbursement createdDisbursement = validatableResponse.extract().as(Disbursement.class);
+        Serenity.setSessionVariable("disbursement").to(createdDisbursement);
 
         SoftAssertions.assertSoftly(softly -> {
-            softly.assertThat(createdDisbursement.getStatus()).as("status").isEqualTo(PENDING);
+            softly.assertThat(createdDisbursement.getStatus().toString()).as("status").isEqualTo(status);
             softly.assertThat(createdDisbursement.getUser_id()).as("user_id").isNotEmpty();
             softly.assertThat(createdDisbursement.getId()).as("id").isNotEmpty();
         });
+        return this;
+    }
+
+    @Step
+    @Then("I validate response body error message $message")
+    public DisbursementSteps validateResponseBodyErrorMessage(String message) {
+        ValidatableResponse validatableResponse = Serenity.sessionVariableCalled("validatableResponse");
+        validatableResponse.body("message", is(message));
         return this;
     }
 }

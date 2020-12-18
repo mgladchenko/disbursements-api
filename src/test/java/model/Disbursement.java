@@ -20,5 +20,5 @@ public class Disbursement {
     @Builder.Default
     private String account_number = "1234567890";
     @Builder.Default
-    private String description = "Disbursement TA";
+    private String description = null;
 }
